@@ -13,7 +13,10 @@ var settings = {
 }
 
 // Replace the github user from the url querystring : ?username
-settings.github_user = location.search.slice(1) || settings.github_user;
+var username = location.search.slice(1) || settings.github_user;
+    username = (username.includes('=')) ? settings.github_user : username;
+
+settings.github_user = username;
 
 var githubAPI = {
 	repos : 'https://api.github.com/users/' + settings.github_user + '/repos?sort=pushed',
